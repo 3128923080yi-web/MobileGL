@@ -214,3 +214,21 @@ androidComponents {
 dependencies {
     implementation(project(":MobileGL"))
 }
+android {
+    signingConfigs {
+        release {
+            storeFile file("path/to/keystore.jks")  // 你的密钥库文件
+            storePassword System.getenv("SIGNING_STORE_PASSWORD")
+            keyAlias System.getenv("SIGNING_KEY_ALIAS")
+            keyPassword System.getenv("SIGNING_KEY_PASSWORD")
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
